@@ -2904,9 +2904,6 @@ static int dwc3_gadget_ep_cleanup_completed_request(struct dwc3_ep *dep,
 		}
 	}
 
-	if(status < 0) {
-		dev_err(dep->dwc->dev, "%s-line %d: status: %d\n", __func__, __LINE__, status);
-	}
 	dwc3_gadget_giveback(dep, req, status);
 
 out:
@@ -3026,8 +3023,8 @@ static void dwc3_gadget_endpoint_transfer_in_progress(struct dwc3_ep *dep,
 	if ((event->status & DEPEVT_STATUS_MISSED_ISOC) &&
 	    usb_endpoint_xfer_isoc(dep->endpoint.desc))
 		status = -EXDEV;
-	if(status < 0)
-		dev_info(dep->dwc->dev, "%s-line %d: status: %d\n", __func__, __LINE__, status);
+	// if(status < 0)
+	// 	dev_info(dep->dwc->dev, "%s-line %d: status: %d\n", __func__, __LINE__, status);
 	dwc3_gadget_endpoint_trbs_complete(dep, event, status);
 }
 
